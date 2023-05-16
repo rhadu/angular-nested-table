@@ -24,3 +24,10 @@ td:has(> .icon-wrapper) {
     padding-inline: 0.25rem;
   }
 }
+
+.action-buttons-container {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}

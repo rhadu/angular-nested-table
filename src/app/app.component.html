@@ -5,7 +5,12 @@
         <th>
           <input type="checkbox" (change)="selectAllRows($event)" />
         </th>
-        <th>Name</th>
+        <th>
+          Name
+          <button *ngIf="isAnyRowSelected" class="btn btn-sm btn-danger ms-2">
+            Delete multiple
+          </button>
+        </th>
         <th>Type</th>
         <th>Email</th>
         <th>Phone Number</th>
@@ -26,7 +31,7 @@
               (change)="onCheckboxChange()"
             />
           </td>
-          <td>
+          <td class="position-relative">
             <div class="icon-wrapper" [ngClass]="{ expanded: row.expanded }">
               <i
                 *ngIf="row.children?.length"
@@ -36,18 +41,14 @@
             </div>
 
             {{ row.name }}
-            <button
+
+            <div
+              class="action-buttons-container"
               *ngIf="row.hover && !isAnyRowSelected"
-              class="btn btn-sm btn-primary me-2"
             >
-              Edit
-            </button>
-            <button
-              *ngIf="row.hover && !isAnyRowSelected"
-              class="btn btn-sm btn-danger"
-            >
-              Delete
-            </button>
+              <button class="btn btn-sm btn-primary me-1">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </div>
           </td>
           <td>{{ row.type }}</td>
           <td>{{ row.email }}</td>
@@ -81,7 +82,7 @@
           (change)="onCheckboxChange()"
         />
       </td>
-      <td [style.padding-left.px]="level * 12 + 8">
+      <td class="position-relative" [style.padding-left.px]="level * 24">
         <div class="icon-wrapper" [ngClass]="{ expanded: row.expanded }">
           <i
             *ngIf="row.children?.length"
@@ -90,12 +91,12 @@
           ></i>
         </div>
         {{ row.name }}
-        <button
+        <div
+          class="action-buttons-container"
           *ngIf="row.hover && !isAnyRowSelected"
-          class="btn btn-sm btn-danger"
         >
-          Delete
-        </button>
+          <button class="btn btn-sm btn-danger">Delete</button>
+        </div>
       </td>
       <td>{{ row.type }}</td>
       <td>{{ row.email }}</td>

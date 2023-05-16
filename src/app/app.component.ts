@@ -11,7 +11,6 @@ import DataItem from './dataItem';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  
   data: DataItem[] = [
     {
       name: 'Susans Boyle',
@@ -185,7 +184,7 @@ export class AppComponent {
     },
   ];
 
-  isAnyRowSelected: boolean = false
+  isAnyRowSelected: boolean = false;
 
   constructor() {}
 
@@ -194,16 +193,17 @@ export class AppComponent {
   selectAllRows(event: Event) {
     const isChecked = (<HTMLInputElement>event.target).checked;
     this.updateRowSelection(this.data, isChecked);
-    this.onCheckboxChange();
+    this.isAnyRowSelected = isChecked;
   }
 
   updateRowSelection(data: DataItem[], isChecked: boolean) {
     data.forEach((row) => {
       row.isSelected = isChecked;
-      if (row.children) this.updateRowSelection(row.children, isChecked);
+      if (row.children) {
+        this.updateRowSelection(row.children, isChecked);
+      }
     });
   }
-
 
   onCheckboxChange() {
     this.isAnyRowSelected = this.checkRowSelection(this.data);
