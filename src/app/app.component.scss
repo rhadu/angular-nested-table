@@ -1,0 +1,19 @@
+.selected-row {
+  background-color: hsla(0, 0%, 0%, 0.1);
+}
+
+tr:hover {
+  background-color: hsla(0, 0%, 0%, 0.05);
+}
+
+.icon-wrapper {
+  display: inline-block;
+  cursor: pointer;
+  padding-inline: 4px;
+  transition: transform 0.3s;
+
+  &.expanded {
+    transform: rotate(90deg);
+  }  
+}
+
