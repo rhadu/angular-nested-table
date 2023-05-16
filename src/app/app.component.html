@@ -20,19 +20,34 @@
           (mouseleave)="row.hover = false"
         >
           <td>
-            <input type="checkbox" [(ngModel)]="row.isSelected" />
+            <input
+              type="checkbox"
+              [(ngModel)]="row.isSelected"
+              (change)="onCheckboxChange()"
+            />
           </td>
           <td>
-            <div class="icon-wrapper">
+            <div class="icon-wrapper" [ngClass]="{ expanded: row.expanded }">
               <i
                 *ngIf="row.children?.length"
                 class="bi-arrow-right-short"
-                [ngClass]="{ expanded: row.expanded }"
                 (click)="row.expanded = !row.expanded"
               ></i>
             </div>
 
-            {{ row.name }} z
+            {{ row.name }}
+            <button
+              *ngIf="row.hover && !isAnyRowSelected"
+              class="btn btn-sm btn-primary me-2"
+            >
+              Edit
+            </button>
+            <button
+              *ngIf="row.hover && !isAnyRowSelected"
+              class="btn btn-sm btn-danger"
+            >
+              Delete
+            </button>
           </td>
           <td>{{ row.type }}</td>
           <td>{{ row.email }}</td>
@@ -60,18 +75,27 @@
       (mouseleave)="row.hover = false"
     >
       <td>
-        <input type="checkbox" [(ngModel)]="row.isSelected" />
+        <input
+          type="checkbox"
+          [(ngModel)]="row.isSelected"
+          (change)="onCheckboxChange()"
+        />
       </td>
       <td [style.padding-left.px]="level * 12 + 8">
-        <div class="icon-wrapper">
+        <div class="icon-wrapper" [ngClass]="{ expanded: row.expanded }">
           <i
             *ngIf="row.children?.length"
             class="bi-arrow-right-short"
-            [ngClass]="{ expanded: row.expanded }"
             (click)="row.expanded = !row.expanded"
           ></i>
         </div>
-        {{ row.name }} - {{ level }}
+        {{ row.name }}
+        <button
+          *ngIf="row.hover && !isAnyRowSelected"
+          class="btn btn-sm btn-danger"
+        >
+          Delete
+        </button>
       </td>
       <td>{{ row.type }}</td>
       <td>{{ row.email }}</td>

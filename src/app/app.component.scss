@@ -7,11 +7,11 @@ tr:hover {
 }
 
 td:has(> .icon-wrapper) {
-  padding-left: 0px;
+  padding-left: 0;
 }
 
 .icon-wrapper {
-  width: 24px;
+  width: 1.5rem;
   display: inline-block;
   cursor: pointer;
   transition: transform 0.3s;
@@ -21,6 +21,6 @@ td:has(> .icon-wrapper) {
   }
 
   & i {
-    padding-inline: 4px;
+    padding-inline: 0.25rem;
   }
 }
