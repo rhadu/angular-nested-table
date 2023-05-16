@@ -6,14 +6,21 @@ tr:hover {
   background-color: hsla(0, 0%, 0%, 0.05);
 }
 
+td:has(> .icon-wrapper) {
+  padding-left: 0px;
+}
+
 .icon-wrapper {
+  width: 24px;
   display: inline-block;
   cursor: pointer;
-  padding-inline: 4px;
   transition: transform 0.3s;
 
   &.expanded {
     transform: rotate(90deg);
-  }  
-}
+  }
 
+  & i {
+    padding-inline: 4px;
+  }
+}

@@ -13,25 +13,25 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let row of data;">
+      <ng-container *ngFor="let row of data">
         <tr
           [ngClass]="{ 'selected-row': row.isSelected }"
           (mouseenter)="row.hover = true"
           (mouseleave)="row.hover = false"
         >
           <td>
-            <input
-              type="checkbox"
-              [(ngModel)]="row.isSelected"
-            />
+            <input type="checkbox" [(ngModel)]="row.isSelected" />
           </td>
           <td>
-            <i
-              *ngIf="row.children?.length"
-              class="bi-arrow-right-short icon-wrapper"
-              [ngClass]="{ expanded: row.expanded }"
-              (click)="row.expanded = !row.expanded"
-            ></i>
+            <div class="icon-wrapper">
+              <i
+                *ngIf="row.children?.length"
+                class="bi-arrow-right-short"
+                [ngClass]="{ expanded: row.expanded }"
+                (click)="row.expanded = !row.expanded"
+              ></i>
+            </div>
+
             {{ row.name }} z
           </td>
           <td>{{ row.type }}</td>
@@ -41,7 +41,10 @@
         </tr>
         <ng-container *ngIf="row.expanded">
           <ng-container
-            *ngTemplateOutlet="nestedRow; context: { $implicit: row.children }"
+            *ngTemplateOutlet="
+              nestedRow;
+              context: { $implicit: row.children, level: 1 }
+            "
           ></ng-container>
         </ng-container>
       </ng-container>
@@ -49,7 +52,7 @@
   </table>
 </div>
 
-<ng-template #nestedRow let-rows>
+<ng-template #nestedRow let-rows let-level="level">
   <ng-container *ngFor="let row of rows">
     <tr
       [ngClass]="{ 'selected-row': row.isSelected }"
@@ -57,19 +60,18 @@
       (mouseleave)="row.hover = false"
     >
       <td>
-        <input
-          type="checkbox"
-          [(ngModel)]="row.isSelected"
-        />
+        <input type="checkbox" [(ngModel)]="row.isSelected" />
       </td>
-      <td>
-        <i
-          *ngIf="row.children?.length"
-          class="bi-arrow-right-short icon-wrapper"
-          [ngClass]="{ expanded: row.expanded }"
-          (click)="row.expanded = !row.expanded"
-        ></i>
-        {{ row.name }}
+      <td [style.padding-left.px]="level * 12 + 8">
+        <div class="icon-wrapper">
+          <i
+            *ngIf="row.children?.length"
+            class="bi-arrow-right-short"
+            [ngClass]="{ expanded: row.expanded }"
+            (click)="row.expanded = !row.expanded"
+          ></i>
+        </div>
+        {{ row.name }} - {{ level }}
       </td>
       <td>{{ row.type }}</td>
       <td>{{ row.email }}</td>
@@ -78,7 +80,10 @@
     </tr>
     <ng-container *ngIf="row.expanded">
       <ng-container
-        *ngTemplateOutlet="nestedRow; context: { $implicit: row.children }"
+        *ngTemplateOutlet="
+          nestedRow;
+          context: { $implicit: row.children, level: level + 1 }
+        "
       ></ng-container>
     </ng-container>
   </ng-container>
