@@ -2,11 +2,12 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import DataItem from '../dataItem';
+import { ColumnResizeDirective } from '../shared/directives/column-resize.directive';
 
 @Component({
   selector: 'nao-data-table',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ColumnResizeDirective],
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
 })
