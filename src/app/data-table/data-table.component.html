@@ -1,0 +1,117 @@
+
+<table class="table table-bordered table-hover table-responsive">
+  <thead>
+    <tr>
+      <th>
+        <input
+          type="checkbox"
+          #selectAllToggle
+          (change)="selectAllRows(selectAllToggle.checked)"
+        />
+      </th>
+      <th>
+        Name
+        <button *ngIf="isAnyRowSelected" class="btn btn-sm btn-danger ms-2">
+          Delete multiple
+        </button>
+      </th>
+      <th>Type</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Company Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let row of filteredData">
+      <tr
+        [ngClass]="{ 'selected-row': row.isSelected }"
+        (mouseenter)="row.hover = true"
+        (mouseleave)="row.hover = false"
+      >
+        <td>
+          <input
+            type="checkbox"
+            [(ngModel)]="row.isSelected"
+            (change)="onCheckboxChange()"
+          />
+        </td>
+        <td class="position-relative">
+          <div class="icon-wrapper" [ngClass]="{ expanded: row.expanded }">
+            <i
+              *ngIf="row.children?.length"
+              class="bi-arrow-right-short"
+              (click)="row.expanded = !row.expanded"
+            ></i>
+          </div>
+
+          {{ row.name }}
+
+          <div
+            class="action-buttons-container"
+            *ngIf="row.hover && !isAnyRowSelected"
+          >
+            <button class="btn btn-sm btn-primary me-1">Edit</button>
+            <button class="btn btn-sm btn-danger">Delete</button>
+          </div>
+        </td>
+        <td>{{ row.type }}</td>
+        <td>{{ row.email }}</td>
+        <td>{{ row.phoneNo }}</td>
+        <td>{{ row.companyName }}</td>
+      </tr>
+      <ng-container *ngIf="row.expanded">
+        <ng-container
+          *ngTemplateOutlet="
+            nestedRow;
+            context: { $implicit: row.children, level: 1 }
+          "
+        ></ng-container>
+      </ng-container>
+    </ng-container>
+  </tbody>
+</table>
+<ng-template #nestedRow let-rows let-level="level">
+  <ng-container *ngFor="let row of rows">
+    <tr
+      [ngClass]="{ 'selected-row': row.isSelected }"
+      (mouseenter)="row.hover = true"
+      (mouseleave)="row.hover = false"
+    >
+      <td>
+        <input
+          type="checkbox"
+          [(ngModel)]="row.isSelected"
+          (change)="onCheckboxChange()"
+        />
+      </td>
+      <td class="position-relative" [style.padding-left.px]="level * 24">
+        <div class="icon-wrapper" [ngClass]="{ expanded: row.expanded }">
+          <i
+            *ngIf="row.children?.length"
+            class="bi-arrow-right-short"
+            (click)="row.expanded = !row.expanded"
+          ></i>
+        </div>
+        {{ row.name }}
+        <div
+          class="action-buttons-container"
+          *ngIf="row.hover && !isAnyRowSelected"
+        >
+          <button class="btn btn-sm btn-danger">Delete</button>
+        </div>
+      </td>
+      <td>{{ row.type }}</td>
+      <td>{{ row.email }}</td>
+      <td>{{ row.phoneNumber }}</td>
+      <td>{{ row.companyName }}</td>
+    </tr>
+    <ng-container *ngIf="row.expanded">
+      <ng-container
+        *ngTemplateOutlet="
+          nestedRow;
+          context: { $implicit: row.children, level: level + 1 }
+        "
+      ></ng-container>
+    </ng-container>
+  </ng-container>
+</ng-template>

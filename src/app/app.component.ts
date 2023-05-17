@@ -1,14 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subject, debounceTime } from 'rxjs';
+
+import { SearchInputComponent } from './search-input/search-input.component';
+import { DataTableComponent } from './data-table/data-table.component';
 import DataItem from './dataItem';
 
 @Component({
   selector: 'nao-root',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    SearchInputComponent,
+    DataTableComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   data: DataItem[] = [
@@ -184,37 +193,11 @@ export class AppComponent {
     },
   ];
 
-  isAnyRowSelected: boolean = false;
-
   constructor() {}
 
-  ngOnInit(): void {}
+  searchTerm: string = '';
 
-  selectAllRows(event: Event) {
-    const isChecked = (<HTMLInputElement>event.target).checked;
-    this.updateRowSelection(this.data, isChecked);
-    this.isAnyRowSelected = isChecked;
-  }
-
-  updateRowSelection(data: DataItem[], isChecked: boolean) {
-    data.forEach((row) => {
-      row.isSelected = isChecked;
-      if (row.children) {
-        this.updateRowSelection(row.children, isChecked);
-      }
-    });
-  }
-
-  onCheckboxChange() {
-    this.isAnyRowSelected = this.checkRowSelection(this.data);
-  }
-
-  checkRowSelection(data: DataItem[]): boolean {
-    for (const row of data) {
-      if (row.isSelected || this.checkRowSelection(row.children || [])) {
-        return true;
-      }
-    }
-    return false;
+  onSearch(searchTerm: string): void {
+    this.searchTerm = searchTerm;
   }
 }
