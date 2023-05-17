@@ -1,27 +1,84 @@
-# NestedTable
+# Angular Table with Column Resizing
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
+This project is an Angular application featuring a dynamic table with column resizing, search functionality, and expandable nested rows.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Table with expandable nested rows
+- Column resizing with min-width and max-width support
+- Search by name functionality with debounce time
+- Column ellipsis for long content
+- Horizontal scrollbar when the table width exceeds container width
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+These instructions will help you set up and run the project on your local machine.
 
-## Build
+### Prerequisites
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Make sure you have the following installed:
 
-## Running unit tests
+- Node.js (12.x or later)
+- Angular CLI (12.x or later)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Installation
 
-## Running end-to-end tests
+1. Clone the project repository:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```sh
+git clone https://github.com/rhadu/angular-nested-table.git
+```
 
-## Further help
+2. Install the dependencies:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```sh
+cd angular-nested-table
+npm install
+```
+
+3. Start the development server:
+
+```sh
+ng serve
+```
+
+4. Open your browser and navigate to `http://localhost:4200`.
+
+## Usage
+
+- Click and drag on the column header's drag handle to resize the column.
+- Type in the search input to filter the table rows by name.
+- Click on the arrow icon in the row to expand or collapse nested rows.
+
+## Folder Structure
+
+The folder structure of the project is organized as follows:
+
+```
+src/
+|-- app/
+    |-- data-table/
+        |-- data-table.component.html
+        |-- data-table.component.ts
+        |-- data-table.component.scss
+    |-- search-input/
+        |-- search-input.component.html
+        |-- search-input.component.ts
+        |-- search-input.component.scss
+    |-- shared/
+        |-- directives/
+            |-- column-resize.directive.ts
+    |-- app.component.html
+    |-- app.component.ts
+    |-- app.config.ts
+    |-- dataItem.ts
+|-- assets/
+|-- index.html
+|-- styles.scss
+|-- main.ts
+```
+
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. 
