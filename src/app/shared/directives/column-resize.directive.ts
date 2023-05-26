@@ -12,9 +12,10 @@ import {
   standalone: true,
 })
 export class ColumnResizeDirective implements OnInit {
-  @Input() minWidth: number = 100;
+  @Input() minWidth: number = 50;
+  @Input() defaultWidth: number = 150;
   @Input() maxWidth?: number;
-
+  
   private resizing: boolean = false;
   private startX!: number;
   private initialWidth!: number;
@@ -29,7 +30,7 @@ export class ColumnResizeDirective implements OnInit {
 
   ngOnInit(): void {
     this.renderer.setStyle(this.el.nativeElement, 'position', 'relative');
-    this.renderer.setStyle(this.el.nativeElement, "width", `${this.minWidth}px`);
+    this.renderer.setStyle(this.el.nativeElement, "width", `${this.defaultWidth}px`);
   }
 
   createDragHandle() {

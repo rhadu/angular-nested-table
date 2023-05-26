@@ -1,28 +1,28 @@
-<div class="table-container">
+<div class="table-container" (scroll)="onScroll($event)">
   <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th naoColumnResize [minWidth]="40">
+    <thead class="sticky-header">
+      <tr >
+        <th naoColumnResize [minWidth]="40" [defaultWidth]="40">
           <input
             type="checkbox"
             #selectAllToggle
             (change)="selectAllRows(selectAllToggle.checked)"
           />
         </th>
-        <th naoColumnResize [minWidth]="250" class="position-relative">
+        <th naoColumnResize [defaultWidth]="250" class="position-relative">
           Name
           <div class="action-buttons-container" *ngIf="isAnyRowSelected">
             <button class="btn btn-sm btn-danger me-2">Delete multiple</button>
           </div>
         </th>
         <th naoColumnResize [minWidth]="150">Type</th>
-        <th naoColumnResize [minWidth]="250">Email</th>
+        <th naoColumnResize [minWidth]="100" [defaultWidth]="250">Email</th>
         <th naoColumnResize [minWidth]="150">Phone Number</th>
         <th naoColumnResize [minWidth]="150">Company Name</th>
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let row of filteredData">
+      <ng-container *ngFor="let row of displayData">
         <tr
           [ngClass]="{ 'selected-row': row.isSelected }"
           (mouseenter)="row.hover = true"

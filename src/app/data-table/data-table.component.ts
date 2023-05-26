@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import DataItem from '../dataItem';
@@ -14,20 +21,46 @@ import { ColumnResizeDirective } from '../shared/directives/column-resize.direct
 export class DataTableComponent implements OnInit, OnChanges {
   @Input() data: DataItem[] = [];
   @Input() searchTerm: string = '';
+  chunkSize: number = 10;
 
   filteredData: DataItem[] = [];
+  displayData: DataItem[] = [];
   isAnyRowSelected: boolean = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['searchTerm']) {
       this.filteredData = this.searchData(this.data, this.searchTerm);
+      this.resetDisplayData()
     }
   }
 
-  constructor() {}
+  constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
     this.filteredData = this.data;
+    this.resetDisplayData();
+  }
+
+  onScroll(event: any) {
+    const target = event.target;
+    const scrollPosition = target.scrollTop + target.offsetHeight;
+    const scrollHeight = target.scrollHeight;
+
+    if (scrollPosition >= scrollHeight) {
+      this.loadMoreData();
+    }
+  }
+  
+  resetDisplayData() {
+    this.displayData = this.filteredData.slice(0, this.chunkSize);
+  }
+
+  loadMoreData() {
+    const startIndex = this.displayData.length;
+    const endIndex = startIndex + this.chunkSize;
+    const newChunk = this.filteredData.slice(startIndex, endIndex);
+
+    this.displayData.push(...newChunk);
   }
 
   selectAllRows(isChecked: boolean): void {
