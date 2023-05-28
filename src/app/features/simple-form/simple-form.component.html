@@ -1,0 +1,41 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      id="username"
+      placeholder="John Doe"
+      name="username"
+      ngModel
+    />
+  </div>
+  <div class="mb-3">
+    <button class="btn btn-outline-secondary">Suggest an Username</button>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Mail</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      placeholder="name@example.com"
+      name="email"
+      ngModel
+    />
+  </div>
+  <div class="mb-3">
+    <label for="secret" class="form-label">Secret Question</label>
+    <select
+      class="form-select"
+      id="secret"
+      aria-label="Secret question"
+      ngModel
+      name="secret"
+    >
+      <option value="pet">Your First Pet</option>
+      <option value="teacher">Your First Teacher</option>
+    </select>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>

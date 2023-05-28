@@ -4,9 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, debounceTime } from 'rxjs';
 
-import { SearchInputComponent } from './search-input/search-input.component';
-import { DataTableComponent } from './data-table/data-table.component';
+import { SearchInputComponent } from './features/search-input/search-input.component';
+import { DataTableComponent } from './features/data-table/data-table.component';
 import DataItem from './dataItem';
+import { RegisterFormComponent } from './features/register-form/register-form.component';
+import { DropdownComponent } from './shared/components/dropdown/dropdown.component';
+import { SimpleFormComponent } from './features/simple-form/simple-form.component';
 
 @Component({
   selector: 'nao-root',
@@ -16,6 +19,9 @@ import DataItem from './dataItem';
     FormsModule,
     SearchInputComponent,
     DataTableComponent,
+    RegisterFormComponent,
+    DropdownComponent,
+    SimpleFormComponent,
   ],
   templateUrl: './app.component.html',
 })

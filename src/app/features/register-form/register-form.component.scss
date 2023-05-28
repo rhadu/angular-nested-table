@@ -1,0 +1,44 @@
+form {
+  margin: auto;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+
+  & div {
+    display: flex;
+    align-items: center;
+
+    & label {
+    }
+
+    & label:not(input[type="checkbox"]:has(+ label) + label) {
+      min-width: 100px;
+    }
+
+    & input[type="text"] {
+      height: 20px;
+      flex: 1;
+
+      &.ng-invalid.ng-touched {
+        border-color: red;
+      }
+    }
+
+    & input[type="checkbox"] {
+      margin-inline: 8px;
+    }
+  }
+
+  button {
+    align-self: flex-end;
+    border: 1px solid hsl(0, 0%, 77%);
+    border-radius: 4px;
+    padding: 4px 16px;
+  }
+}
+
+.error {
+  color: red;
+}

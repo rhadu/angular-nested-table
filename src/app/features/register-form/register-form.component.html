@@ -1,0 +1,53 @@
+<form [formGroup]="profileForm" (ngSubmit)="submit()">
+  <input #accessId type="text" placeholder="What's your name?'" />
+  <div>
+    <label for="title-select">Title</label>
+    <select id="title-select" formControlName="title">
+      <option>-- Select an option --</option>
+      <option
+        *ngFor="let title of titles"
+        [value]="title.name"
+        [selected]="title.isDefault ? 'selected' : ''"
+      >
+        {{ title.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label for="first-name-input">First Name</label>
+    <input
+      id="first-name-input"
+      type="text"
+      placeholder="First Name"
+      formControlName="firstName"
+    />
+  </div>
+  <div>
+    <label for="last-name-input">Last Name</label>
+    <input
+      id="last-name-input"
+      type="text"
+      placeholder="Last Name"
+      formControlName="lastName"
+    />
+  </div>
+  <div
+    *ngIf="profileForm.touched && profileForm.status === 'INVALID'"
+    class="error"
+  >
+    *Last name is mandatory
+  </div>
+  <div>
+    <input
+      id="check-name-input"
+      type="checkbox"
+      formControlName="termsAccepted"
+    />
+    <label for="check-name-input">I accept the terms and conditions</label>
+  </div>
+
+  <button [disabled]="profileForm.value.termsAccepted ? false : true">
+    Submit
+  </button>
+</form>
