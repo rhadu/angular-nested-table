@@ -23,6 +23,7 @@ export class ReactiveFormTMComponent {
       email: ['', [Validators.required, Validators.email]],
       subscription: ['Advanced'],
       password: ['', Validators.required],
+      hobbies: this.formBuilder.array([]),
     });
   }
 
