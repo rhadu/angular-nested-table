@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+<form (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
   <div class="mb-3">
     <label for="username" class="form-label">Username</label>
     <input
@@ -8,10 +8,24 @@
       placeholder="John Doe"
       name="username"
       ngModel
+      required
+      #username="ngModel"
     />
+    <div
+      class="text-danger"
+      *ngIf="username.touched && username.errors?.required"
+    >
+      Username is required.
+    </div>
   </div>
   <div class="mb-3">
-    <button class="btn btn-outline-secondary">Suggest an Username</button>
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="suggestName()"
+    >
+      Suggest an Username
+    </button>
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Mail</label>
@@ -22,7 +36,16 @@
       placeholder="name@example.com"
       name="email"
       ngModel
+      required
+      email
+      #email="ngModel"
     />
+    <div class="text-danger" *ngIf="email.touched && email.errors?.required">
+      Email is required.
+    </div>
+    <div class="text-danger" *ngIf="email.touched && email.errors?.email">
+      Please enter a valid email.
+    </div>
   </div>
   <div class="mb-3">
     <label for="secret" class="form-label">Secret Question</label>
@@ -30,12 +53,49 @@
       class="form-select"
       id="secret"
       aria-label="Secret question"
-      ngModel
+      [ngModel]="defaultSecret"
       name="secret"
+      required
     >
-      <option value="pet">Your First Pet</option>
-      <option value="teacher">Your First Teacher</option>
+      <option
+        *ngFor="let question of secretQuestions"
+        value="{{ question.value }}"
+      >
+        {{ question.question }}
+      </option>
     </select>
   </div>
-  <button class="btn btn-primary" type="submit">Submit</button>
+  <div class="mb-3">
+    <textarea
+      class="form-control"
+      name="questionAnswer"
+      id="questionAnswer"
+      [(ngModel)]="questionAnswer"
+    ></textarea>
+  </div>
+  <p>Your reply is: {{ questionAnswer }}</p>
+  <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">
+    Submit
+  </button>
 </form>
+
+<h3>Your Data:</h3>
+<div class="d-flex flex-column">
+  <span>Username: {{ user.username }}</span>
+  <span>Mail: {{ user.email }}</span>
+  <span>Question: {{ user.question }}</span>
+  <span>Answer: {{ user.answer }}</span>
+</div>
+<!--
+  Add a Form with the following Inputs (and Validators)
+  1) Mail address (should not be empty and should be an email address)
+  2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced". "Pro")
+  Set "Advanced" as Default
+  3) A Password field (should not be empty)
+  4) A Submit Button
+
+  Display a warning message if the Form is invalid AND was touched. Display a warning message below each input if it's invalid.
+  Upon submitting the form, you should simply print the Value of the Form to the Console.
+  Optionally, display it in your template
+
+  -->

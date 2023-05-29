@@ -10,6 +10,7 @@ import DataItem from './dataItem';
 import { RegisterFormComponent } from './features/register-form/register-form.component';
 import { DropdownComponent } from './shared/components/dropdown/dropdown.component';
 import { SimpleFormComponent } from './features/simple-form/simple-form.component';
+import { ReactiveFormTMComponent } from './features/reactive-form-tm/reactive-form-tm.component';
 
 @Component({
   selector: 'nao-root',
@@ -22,6 +23,7 @@ import { SimpleFormComponent } from './features/simple-form/simple-form.componen
     RegisterFormComponent,
     DropdownComponent,
     SimpleFormComponent,
+    ReactiveFormTMComponent
   ],
   templateUrl: './app.component.html',
 })

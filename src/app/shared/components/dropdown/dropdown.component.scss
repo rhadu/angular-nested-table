@@ -5,6 +5,12 @@
   display: block;
   visibility: hidden;
   transition: all 200ms ease-in-out;
+
+  .open & {
+    transform: translateY(0%);
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .caret-wrapper {
@@ -13,18 +19,8 @@
 
 .dropdown-toggle::after {
   transition: all 200ms ease-in-out;
-}
 
-.open {
-  & .dropdown-menu {
-    transform: translateY(0%);
-    opacity: 1;
-    visibility: visible;
-    transition: all 200ms ease-in-out;
-  }
-
-  & .dropdown-toggle::after {
+  .open & {
     transform: rotate(180deg);
-    transition: all 200ms ease-in-out;
   }
 }
