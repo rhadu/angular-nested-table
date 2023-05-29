@@ -1,1 +1,102 @@
-<p>reactive-forms works!</p>
+<div class="container">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <ng-container formGroupName="userData">
+      <div class="mb-4">
+        <div class="label-wrapper">
+          <label for="username">Username</label>
+          <span
+            [ngClass]="{
+              shown:
+                !signupForm.get('userData.username')?.valid &&
+                signupForm.get('userData.username')?.touched
+            }"
+            class="help-block"
+          >
+            <p *ngIf="signupForm.get('userData.username')?.errors?.required">
+              Please enter a valid user name
+            </p>
+            <p
+              *ngIf="
+                signupForm.get('userData.username')?.errors?.nameIsForbidden
+              "
+            >
+              Please choose another name
+            </p>
+          </span>
+        </div>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          formControlName="username"
+        />
+      </div>
+      <div class="mb-4">
+        <div class="label-wrapper">
+          <label for="email">email</label>
+          <span
+            [ngClass]="{
+              shown:
+                signupForm.get('userData.email')?.errors?.email &&
+                signupForm.get('userData.email')?.touched
+            }"
+            class="help-block"
+            >Please enter a valid email</span
+          >
+          <span
+            [ngClass]="{
+              shown:
+                signupForm.get('userData.email')?.errors?.required &&
+                signupForm.get('userData.email')?.touched
+            }"
+            class="help-block"
+            >Please enter an email adress</span
+          >
+          <span
+            [ngClass]="{
+              shown:
+                signupForm.get('userData.email')?.errors?.emailIsForbidden &&
+                signupForm.get('userData.email')?.touched
+            }"
+            class="help-block"
+            >Email is forbidden!</span
+          >
+        </div>
+        <input
+          type="text"
+          id="email"
+          class="form-control"
+          formControlName="email"
+        />
+      </div>
+    </ng-container>
+
+    <div class="mb-2 radio" *ngFor="let gender of genders">
+      <label>
+        <input type="radio" [value]="gender" formControlName="gender" />{{
+          gender
+        }}
+      </label>
+    </div>
+
+    <div formArrayName="hobbies">
+      <h4>Your Hobbies</h4>
+      <button
+        class="mb-4 btn btn-outline-secondary"
+        type="button"
+        (click)="onAddHobby()"
+      >
+        Add Hobby
+      </button>
+
+      <div
+        class="mb-4"
+        *ngFor="let hobbyControl of signupFormHobbies.controls; let i = index"
+      >
+        <input type="text" class="form-control" [formControlName]="i" />
+      </div>
+    </div>
+
+    <button class="mt-4 btn btn-primary" type="submit">Submit</button>
+  </form>
+</div>

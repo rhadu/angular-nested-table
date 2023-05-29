@@ -11,6 +11,7 @@ import { RegisterFormComponent } from './features/register-form/register-form.co
 import { DropdownComponent } from './shared/components/dropdown/dropdown.component';
 import { SimpleFormComponent } from './features/simple-form/simple-form.component';
 import { ReactiveFormTMComponent } from './features/reactive-form-tm/reactive-form-tm.component';
+import { ReactiveFormsComponent } from './features/reactive-forms/reactive-forms.component';
 
 @Component({
   selector: 'nao-root',
@@ -23,7 +24,8 @@ import { ReactiveFormTMComponent } from './features/reactive-form-tm/reactive-fo
     RegisterFormComponent,
     DropdownComponent,
     SimpleFormComponent,
-    ReactiveFormTMComponent
+    ReactiveFormTMComponent,
+    ReactiveFormsComponent
   ],
   templateUrl: './app.component.html',
 })

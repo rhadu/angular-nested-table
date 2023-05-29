@@ -1,0 +1,28 @@
+.container {
+  margin-top: 30px;
+}
+
+.label-wrapper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.help-block {
+  color: red;
+  position: absolute;
+  right: 0;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+
+  &.shown {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.form-control {
+  position: relative;
+  z-index: 1;
+}
