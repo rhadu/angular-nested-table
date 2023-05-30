@@ -12,6 +12,7 @@ import { DropdownComponent } from './shared/components/dropdown/dropdown.compone
 import { SimpleFormComponent } from './features/simple-form/simple-form.component';
 import { ReactiveFormTMComponent } from './features/reactive-form-tm/reactive-form-tm.component';
 import { ReactiveFormsComponent } from './features/reactive-forms/reactive-forms.component';
+import { TodoListComponent } from './features/todo-list/todo-list.component';
 
 @Component({
   selector: 'nao-root',
@@ -25,7 +26,8 @@ import { ReactiveFormsComponent } from './features/reactive-forms/reactive-forms
     DropdownComponent,
     SimpleFormComponent,
     ReactiveFormTMComponent,
-    ReactiveFormsComponent
+    ReactiveFormsComponent,
+    TodoListComponent
   ],
   templateUrl: './app.component.html',
 })

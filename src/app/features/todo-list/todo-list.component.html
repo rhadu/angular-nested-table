@@ -1,0 +1,22 @@
+<!-- 
+   Create an input field where the user can enter a new to-do item.
+   When the user submits the to-do item, add it to the list of to-do items.
+   Display the list of to-do items on the screen.
+   Each to-do item in the list should have a button to remove the item from the list.
+   Create a counter showing the total number of to-do items in the list.
+   (Optional) Implement a simple filter to show only completed or incomplete tasks. -->
+
+<div>
+  <input type="text" [(ngModel)]="newTodo" />
+  <button type="button" (click)="onAddTodo(newTodo)">Create</button>
+</div>
+
+<h2>Total number of items {{ items.length }}</h2>
+
+<div *ngFor="let item of items">
+  <label for="todo-item-1">
+    <input type="checkbox" [checked]="item.done" (change)="onTodoToggle(item.id)" />
+    {{ item.label }}
+  </label>
+  <button (click)="onRemoveTodo(item.id)">Remove</button>
+</div>
